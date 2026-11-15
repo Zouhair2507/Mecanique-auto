@@ -101,6 +101,8 @@ function sanitizeSettings(input) {
     email: email(g.email, 'E-mail du garage', { required: false }),
     siret: text(g.siret, 'SIRET', { max: 20 }),
     mapUrl: url(g.mapUrl, 'Lien Google Maps'),
+    legalManager: text(g.legalManager, 'Responsable de la publication', { max: 120 }),
+    host: text(g.host, 'Hébergeur', { max: 200 }),
   };
 
   const hourlyRates = assignIds(

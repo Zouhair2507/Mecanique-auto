@@ -31,6 +31,19 @@ Au premier démarrage, si aucun mot de passe n’est défini, un mot de passe ad
 npm run set-password
 ```
 
+## Mode démonstration
+
+Pour voir le site « en conditions réelles » avec un garage fictif (Garage des Tilleuls, à Villeurbanne), des rendez-vous passés et à venir et des conversations de support :
+
+```bash
+npm run demo
+```
+
+- Environ 50 rendez-vous et 6 demandes de support **fictifs** sont générés autour de la date du jour (clients et véhicules inventés, téléphones dans la plage 06 39 98 xx xx réservée par l’ARCEP à la fiction, e-mails en `@example.com`).
+- Vos vrais rendez-vous, vos vraies demandes et vos réglages sont conservés ; relancer la commande remplace seulement les éléments de démonstration.
+- Dans `/admin`, le tableau de bord affiche un bandeau « Mode démonstration » avec un bouton **Supprimer les données de démonstration**.
+- Les informations du garage (nom, adresse, téléphone, e-mail, SIRET volontairement invalide, mentions légales), les tarifs et les horaires sont des **exemples** : modifiez-les dans `/admin` › « Horaires & infos » et « Tarifs & prestations ».
+
 ## Configuration
 
 Copiez `.env.example` en `.env` et adaptez :
@@ -50,9 +63,7 @@ Tout se fait depuis l’espace garage (`/admin`) :
 - **Tarifs & prestations** : taux horaires (prix TTC, le HT est calculé), catégories et prestations (nom, description, prix, « à partir de », durée).
 - **Horaires & infos** : horaires par jour (plusieurs plages possibles, par ex. fermeture le midi), fermetures exceptionnelles, réglages des rendez-vous (durée d’un créneau, nombre de véhicules par créneau, délai minimum, réservation jusqu’à N jours), jours fériés, nom, adresse, téléphone, e-mail, SIRET, bandeau d’information, FAQ.
 
-Les valeurs fournies au départ (prix, horaires, coordonnées) sont des **exemples** : remplacez-les par les vôtres. Elles sont définies dans `src/defaults.js` et copiées dans `data/db.json` au premier démarrage.
-
-Pensez aussi à compléter les informations de la page **Mentions légales** (`public/mentions-legales.html` : responsable de la publication, hébergeur).
+Les valeurs fournies au départ (garage fictif, prix, horaires, coordonnées, responsable de la publication, hébergeur) sont des **exemples** : remplacez-les par les vôtres depuis `/admin`. Elles sont définies dans `src/defaults.js` et copiées dans `data/db.json` au premier démarrage.
 
 ## Mise en ligne
 
@@ -92,6 +103,7 @@ src/app.js             API (rendez-vous, support, administration)
 src/schedule.js        horaires, jours fériés, créneaux disponibles
 src/validate.js        validation des données
 src/defaults.js        réglages par défaut (tarifs, horaires, FAQ…)
+src/demo.js            données de démonstration (npm run demo)
 src/store.js           enregistrement dans data/db.json
 public/                pages du site (HTML, CSS, JavaScript sans framework)
 test/                  tests automatisés (node --test)

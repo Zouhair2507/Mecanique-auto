@@ -22,18 +22,23 @@ const FUEL_TYPES = ['Essence', 'Diesel', 'Hybride', 'Électrique', 'GPL', 'Autre
 const ICONS = ['oil', 'brake', 'wrench', 'tire', 'snow', 'bolt', 'spring', 'car'];
 
 const defaultSettings = {
+  // Informations FICTIVES de démonstration : à remplacer dans /admin > Horaires & infos.
+  // (Numéro de téléphone pris dans la plage réservée aux œuvres de fiction par l'ARCEP,
+  // SIRET volontairement invalide.)
   garage: {
-    name: 'Mécanique Auto',
-    tagline: 'Entretien et réparation toutes marques',
+    name: 'Garage des Tilleuls',
+    tagline: 'Mécanique toutes marques · Villeurbanne',
     description:
-      "Garage indépendant : entretien, réparation et diagnostic pour tous les véhicules. Prix affichés, devis gratuit et aucune intervention sans votre accord.",
-    address: '12 rue de l’Atelier',
-    postalCode: '00000',
-    city: 'Votre ville',
-    phone: '01 23 45 67 89',
-    email: 'contact@exemple.fr',
-    siret: '',
+      'Garage indépendant à Villeurbanne : entretien, réparation et diagnostic pour toutes les marques. Prix affichés, devis gratuit et aucune intervention sans votre accord.',
+    address: '18 avenue des Tilleuls',
+    postalCode: '69100',
+    city: 'Villeurbanne',
+    phone: '04 65 71 23 48',
+    email: 'contact@garage-des-tilleuls.fr',
+    siret: '841 562 397 00027',
     mapUrl: '',
+    legalManager: 'Karim Benali, gérant',
+    host: 'OVH SAS, 2 rue Kellermann, 59100 Roubaix, France',
   },
 
   announcement: '',

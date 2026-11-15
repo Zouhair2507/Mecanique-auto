@@ -373,7 +373,20 @@ body.admin {
   margin-top: 3px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 8px;
+}
+
+.ticket-item .ti-meta > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket-item .ti-meta > span:last-child {
+  flex: none;
+  white-space: nowrap;
 }
 
 .unread-dot {
@@ -712,4 +725,12 @@ body.admin {
 .settings-card .btn {
   white-space: normal;
   text-align: left;
+}
+
+.demo-banner {
+  margin-bottom: 20px;
+}
+
+.demo-banner .form-actions {
+  margin-top: 12px;
 }

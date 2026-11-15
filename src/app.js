@@ -389,7 +389,18 @@ function createApp(options = {}) {
       openTickets: store.data.tickets.filter((t) => t.status === 'open').length,
       unreadTickets: store.data.tickets.filter((t) => t.unread).length,
       unseenAppointments: store.data.appointments.filter((a) => !a.seen).length,
+      demoAppointments: store.data.appointments.filter((a) => a.demo).length,
+      demoTickets: store.data.tickets.filter((t) => t.demo).length,
     });
+  });
+
+  // Supprime d'un coup les rendez-vous et demandes de démonstration
+  app.post('/api/admin/demo/clear', (_req, res) => {
+    const before = store.data.appointments.length + store.data.tickets.length;
+    store.data.appointments = store.data.appointments.filter((a) => !a.demo);
+    store.data.tickets = store.data.tickets.filter((t) => !t.demo);
+    store.save();
+    res.json({ ok: true, removed: before - store.data.appointments.length - store.data.tickets.length });
   });
 
   app.get('/api/admin/appointments', (_req, res) => {

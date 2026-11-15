@@ -1194,7 +1194,8 @@ p {
 }
 
 .page-body {
-  padding: 36px 0 84px;
+  padding-top: 36px;
+  padding-bottom: 84px;
 }
 
 /* ---------- Onglets ---------- */

@@ -299,6 +299,8 @@
       else if (key === 'email-link') el.href = `mailto:${g.email}`;
       else if (key === 'address') el.textContent = fullAddress(g);
       else if (key === 'siret') el.textContent = g.siret || '[à compléter]';
+      else if (key === 'legal-manager') el.textContent = g.legalManager || '[à compléter]';
+      else if (key === 'host') el.textContent = g.host || '[à compléter]';
     });
   }
 
@@ -401,7 +403,7 @@
     renderHelpButton(page);
     try {
       const config = await loadConfig();
-      renderAnnouncement(config);
+      if (page !== 'admin') renderAnnouncement(config);
       renderFooter(config);
       applyBindings(config);
       document.title = document.title.replace('{garage}', config.garage.name);

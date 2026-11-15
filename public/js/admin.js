@@ -188,10 +188,53 @@
     const stat = (value, label, onclick, accent) =>
       h('button', { type: 'button', class: `card stat${accent && value ? ' accent' : ''}`, onclick }, h('div', { class: 'stat-value', text: String(value) }), h('div', { class: 'stat-label', text: label }));
 
-    const todays = state.appointments.filter((a) => a.date === state.today && a.status !== 'cancelled');
+    // Rendez-vous du jour, ou du prochain jour qui en compte (le garage peut être fermé aujourd'hui)
+    let focusDate = state.today;
+    let todays = state.appointments.filter((a) => a.date === state.today && a.status !== 'cancelled');
+    if (!todays.length) {
+      const next = state.appointments.find((a) => a.date > state.today && ['pending', 'confirmed'].includes(a.status));
+      if (next) {
+        focusDate = next.date;
+        todays = state.appointments.filter((a) => a.date === focusDate && a.status !== 'cancelled');
+      }
+    }
+    const focusTitle =
+      focusDate === state.today ? `Aujourd’hui — ${Garage.capitalize(fmt.date(state.today))}` : `Prochains rendez-vous — ${Garage.capitalize(fmt.date(focusDate))}`;
     const openTickets = state.tickets.filter((t) => t.status === 'open').slice(0, 5);
 
+    const demoTotal = (s.demoAppointments || 0) + (s.demoTickets || 0);
+    const demoBanner =
+      demoTotal > 0 &&
+      h(
+        'div',
+        { class: 'alert alert-info demo-banner' },
+        icon('info'),
+        h(
+          'div',
+          null,
+          h('strong', { text: 'Mode démonstration. ' }),
+          `Le site contient ${s.demoAppointments} rendez-vous et ${s.demoTickets} demandes de support fictifs, pour vous montrer son fonctionnement. Les informations du garage, tarifs et horaires sont aussi des exemples : modifiez-les dans « Tarifs & prestations » et « Horaires & infos ».`,
+          h(
+            'div',
+            { class: 'form-actions' },
+            h('button', {
+              type: 'button',
+              class: 'btn btn-dark btn-sm',
+              text: 'Supprimer les données de démonstration',
+              onclick: async () => {
+                if (!confirm('Supprimer tous les rendez-vous et demandes de démonstration ? Vos données réelles sont conservées.')) return;
+                if (!(await quiet(call(() => api.post('/api/admin/demo/clear'), 'Données de démonstration supprimées')))) return;
+                await quiet(Promise.all([loadStats(), loadAppointments(), loadTickets()]));
+                renderTab();
+              },
+            }),
+            h('button', { type: 'button', class: 'btn btn-outline btn-sm', text: 'Modifier les infos du garage', onclick: () => switchTab('settings') })
+          )
+        )
+      );
+
     panels.dashboard.replaceChildren(
+      demoBanner || '',
       h(
         'div',
         { class: 'stats' },
@@ -222,8 +265,9 @@
           true
         )
       ),
-      h('div', { class: 'admin-section-title' }, h('h2', { text: `Aujourd’hui — ${Garage.capitalize(fmt.date(state.today))}` })),
-      todays.length ? h('div', null, todays.map((a) => appointmentCard(a))) : h('div', { class: 'empty-state', text: 'Aucun rendez-vous aujourd’hui.' }),
+      h('div', { class: 'admin-section-title' }, h('h2', { text: focusTitle })),
+      focusDate !== state.today ? h('p', { class: 'muted small', text: 'Aucun rendez-vous aujourd’hui.' }) : null,
+      todays.length ? h('div', null, todays.map((a) => appointmentCard(a))) : h('div', { class: 'empty-state', text: 'Aucun rendez-vous prévu.' }),
       h(
         'div',
         { class: 'admin-section-title mt-lg' },
@@ -1015,7 +1059,9 @@
           bound(g, 'phone', 'Téléphone', { type: 'tel', maxlength: 20 }),
           bound(g, 'email', 'E-mail', { type: 'email', maxlength: 120 }),
           bound(g, 'siret', 'SIRET', { maxlength: 20 }),
-          bound(g, 'mapUrl', 'Lien Google Maps (facultatif)', { type: 'url', maxlength: 500, placeholder: 'https://maps.app.goo.gl/…' })
+          bound(g, 'mapUrl', 'Lien Google Maps (facultatif)', { type: 'url', maxlength: 500, placeholder: 'https://maps.app.goo.gl/…' }),
+          bound(g, 'legalManager', 'Responsable de la publication (mentions légales)', { maxlength: 120 }),
+          bound(g, 'host', 'Hébergeur du site (mentions légales)', { maxlength: 200, placeholder: 'Nom et adresse de l’hébergeur' })
         )
       ),
       card(
