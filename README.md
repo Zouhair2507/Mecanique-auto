@@ -31,19 +31,6 @@ Au premier démarrage, si aucun mot de passe n’est défini, un mot de passe ad
 npm run set-password
 ```
 
-## Mode démonstration
-
-Pour voir le site « en conditions réelles » avec un garage fictif (Garage des Tilleuls, à Villeurbanne), des rendez-vous passés et à venir et des conversations de support :
-
-```bash
-npm run demo
-```
-
-- Environ 50 rendez-vous et 6 demandes de support **fictifs** sont générés autour de la date du jour (clients et véhicules inventés, téléphones dans la plage 06 39 98 xx xx réservée par l’ARCEP à la fiction, e-mails en `@example.com`).
-- Vos vrais rendez-vous, vos vraies demandes et vos réglages sont conservés ; relancer la commande remplace seulement les éléments de démonstration.
-- Dans `/admin`, le tableau de bord affiche un bandeau « Mode démonstration » avec un bouton **Supprimer les données de démonstration**.
-- Les informations du garage (nom, adresse, téléphone, e-mail, SIRET volontairement invalide, mentions légales), les tarifs et les horaires sont des **exemples** : modifiez-les dans `/admin` › « Horaires & infos » et « Tarifs & prestations ».
-
 ## Configuration
 
 Copiez `.env.example` en `.env` et adaptez :
@@ -103,7 +90,6 @@ src/app.js             API (rendez-vous, support, administration)
 src/schedule.js        horaires, jours fériés, créneaux disponibles
 src/validate.js        validation des données
 src/defaults.js        réglages par défaut (tarifs, horaires, FAQ…)
-src/demo.js            données de démonstration (npm run demo)
 src/store.js           enregistrement dans data/db.json
 public/                pages du site (HTML, CSS, JavaScript sans framework)
 test/                  tests automatisés (node --test)

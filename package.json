@@ -7,7 +7,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "demo": "node server.js --demo",
     "test": "node --test",
     "set-password": "node scripts/set-password.js"
   },

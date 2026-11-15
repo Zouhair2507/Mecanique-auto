@@ -23,14 +23,6 @@ const app = createApp({
   trustProxy: process.env.TRUST_PROXY === '1',
 });
 
-// « npm run demo » : remplit le site avec des rendez-vous et demandes fictifs
-if (process.argv.includes('--demo')) {
-  const { seedDemo } = require('./src/demo');
-  const n = seedDemo(app.locals.store, { timeZone: process.env.GARAGE_TIMEZONE || 'Europe/Paris' });
-  console.log(`Données de démonstration générées : ${n.appointments} rendez-vous, ${n.tickets} demandes de support.`);
-  console.log('Elles peuvent être supprimées en un clic depuis /admin (Tableau de bord).');
-}
-
 // Premier démarrage sans ADMIN_PASSWORD : on génère un mot de passe et on l'affiche une seule fois.
 const store = app.locals.store;
 if (!process.env.ADMIN_PASSWORD && !store.readAuth().passwordHash) {
