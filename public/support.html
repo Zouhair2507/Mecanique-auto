@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support et questions fréquentes — {garage}</title>
+  <meta name="description" content="Questions fréquentes, demande de devis, suivi de réparation : contactez le garage et suivez votre demande en ligne.">
+  <meta name="theme-color" content="#0f1b2d">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/support.js" defer></script>
+</head>
+<body data-page="support">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1>Support client</h1>
+        <p>Une question, un devis, le suivi de votre réparation ? Consultez les réponses rapides ou écrivez-nous : vous suivez ensuite votre demande en ligne.</p>
+      </div>
+    </section>
+
+    <div class="container page-body">
+      <div class="support-layout">
+        <section class="faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">Questions fréquentes</h2>
+          <div id="faq-list"><p class="loading">Chargement…</p></div>
+          <div class="contact-quick" id="contact-quick"></div>
+        </section>
+
+        <section class="card panel" aria-label="Demandes de support">
+          <div class="tabs" role="tablist" aria-label="Support">
+            <button class="tab" role="tab" id="tab-ticket-new" aria-controls="ticket-new" aria-selected="true" type="button">Nouvelle demande</button>
+            <button class="tab" role="tab" id="tab-ticket-follow" aria-controls="ticket-follow" aria-selected="false" type="button">Suivre ma demande</button>
+          </div>
+
+          <div id="ticket-new" role="tabpanel" aria-labelledby="tab-ticket-new">
+            <form id="ticket-form" novalidate>
+              <div id="ticket-errors"></div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="t-name">Nom et prénom <span class="req">*</span></label>
+                  <input id="t-name" name="name" type="text" maxlength="80" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="t-email">E-mail <span class="req">*</span></label>
+                  <input id="t-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="t-phone">Téléphone</label>
+                  <input id="t-phone" name="phone" type="tel" maxlength="20" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="t-category">Type de demande <span class="req">*</span></label>
+                  <select id="t-category" name="category" required></select>
+                </div>
+                <div class="field full">
+                  <label for="t-subject">Objet <span class="req">*</span></label>
+                  <input id="t-subject" name="subject" type="text" maxlength="120" required placeholder="Ex. : Devis embrayage Clio 4">
+                </div>
+                <div class="field">
+                  <label for="t-plate">Immatriculation</label>
+                  <input id="t-plate" name="plate" type="text" maxlength="15" autocomplete="off" placeholder="AB-123-CD">
+                </div>
+                <div class="field">
+                  <label for="t-rdv">Référence de rendez-vous</label>
+                  <input id="t-rdv" name="appointmentRef" type="text" maxlength="20" autocomplete="off" placeholder="RDV-XXXXXX (si vous en avez une)">
+                </div>
+                <div class="field full">
+                  <label for="t-message">Votre message <span class="req">*</span></label>
+                  <textarea id="t-message" name="message" maxlength="4000" required placeholder="Décrivez votre demande : véhicule, symptômes, prestation souhaitée…"></textarea>
+                </div>
+                <div class="hp-field" aria-hidden="true">
+                  <label for="t-website">Ne pas remplir</label>
+                  <input id="t-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+                <label class="checkbox full">
+                  <input type="checkbox" name="consent">
+                  <span>J’accepte que mes données soient utilisées par le garage pour traiter ma demande. <a href="/mentions-legales#donnees">En savoir plus</a></span>
+                </label>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit" id="ticket-submit">Envoyer ma demande</button>
+                <span class="muted small">Réponse sous 24 h ouvrées.</span>
+              </div>
+            </form>
+            <div id="ticket-created"></div>
+          </div>
+
+          <div id="ticket-follow" role="tabpanel" aria-labelledby="tab-ticket-follow" class="hidden">
+            <form id="follow-form" novalidate>
+              <p class="muted">Saisissez la référence de votre demande (ex. SAV-AB12CD) et votre adresse e-mail.</p>
+              <div id="follow-errors"></div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="f-ref">Référence</label>
+                  <input id="f-ref" name="ref" type="text" maxlength="20" autocomplete="off" placeholder="SAV-XXXXXX" required>
+                </div>
+                <div class="field">
+                  <label for="f-email">E-mail</label>
+                  <input id="f-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-dark" type="submit">Afficher ma demande</button>
+              </div>
+            </form>
+            <div id="thread-view"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

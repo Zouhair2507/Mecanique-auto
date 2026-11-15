@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Espace garage — {garage}</title>
+  <meta name="theme-color" content="#0f1b2d">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/admin.js" defer></script>
+</head>
+<body data-page="admin" class="admin">
+  <!-- Connexion -->
+  <main id="login-view" class="login-wrap hidden">
+    <form class="card login-card" id="login-form" novalidate>
+      <div class="brand">
+        <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <span class="brand-text"><span class="brand-name">Espace garage</span><span class="brand-tag">Administration du site</span></span>
+      </div>
+      <div id="login-errors"></div>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Se connecter</button>
+      <a class="small" href="/">← Retour au site</a>
+    </form>
+  </main>
+
+  <!-- Application -->
+  <div id="app-view" class="hidden">
+    <header class="admin-top">
+      <div class="container admin-top-inner">
+        <a class="brand" href="/admin">
+          <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <span class="brand-text"><span class="brand-name" data-bind="name"></span><span class="brand-tag">Espace garage</span></span>
+        </a>
+        <div class="admin-top-actions">
+          <a class="btn btn-ghost-light btn-sm" href="/" target="_blank" rel="noopener">Voir le site</a>
+          <button class="btn btn-ghost-light btn-sm" type="button" id="logout-btn">Déconnexion</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container admin-main">
+      <div class="tabs admin-tabs" role="tablist" aria-label="Sections">
+        <button class="tab" role="tab" type="button" data-tab="dashboard" aria-selected="true">Tableau de bord</button>
+        <button class="tab" role="tab" type="button" data-tab="appointments" aria-selected="false">Rendez-vous <span class="badge badge-count hidden" id="badge-appointments"></span></button>
+        <button class="tab" role="tab" type="button" data-tab="tickets" aria-selected="false">Support <span class="badge badge-count hidden" id="badge-tickets"></span></button>
+        <button class="tab" role="tab" type="button" data-tab="prices" aria-selected="false">Tarifs & prestations</button>
+        <button class="tab" role="tab" type="button" data-tab="settings" aria-selected="false">Horaires & infos</button>
+      </div>
+
+      <section data-panel="dashboard"></section>
+      <section data-panel="appointments" class="hidden"></section>
+      <section data-panel="tickets" class="hidden"></section>
+      <section data-panel="prices" class="hidden"></section>
+      <section data-panel="settings" class="hidden"></section>
+    </main>
+
+    <div class="save-bar hidden" id="save-bar" role="region" aria-label="Enregistrement">
+      <div class="container save-bar-inner">
+        <span>Vous avez des modifications non enregistrées.</span>
+        <div class="save-actions">
+          <button class="btn btn-ghost-light btn-sm" type="button" id="discard-btn">Annuler</button>
+          <button class="btn btn-primary btn-sm" type="button" id="save-btn">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+</body>
+</html>

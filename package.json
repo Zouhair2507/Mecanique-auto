@@ -1,0 +1,20 @@
+{
+  "name": "mecanique-auto",
+  "version": "1.0.0",
+  "description": "Site du garage : tarifs des prestations, taux horaires, horaires d'ouverture, prise de rendez-vous en ligne et support client.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test",
+    "set-password": "node scripts/set-password.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

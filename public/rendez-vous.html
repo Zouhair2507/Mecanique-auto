@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prendre rendez-vous — {garage}</title>
+  <meta name="description" content="Réservez en ligne votre rendez-vous au garage : choisissez vos prestations, une date et un horaire.">
+  <meta name="theme-color" content="#0f1b2d">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/booking.js" defer></script>
+</head>
+<body data-page="booking">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1>Prendre rendez-vous</h1>
+        <p>Choisissez vos prestations et un créneau de dépôt. Vous recevez immédiatement une référence de rendez-vous.</p>
+      </div>
+    </section>
+
+    <div class="container page-body">
+      <div class="tabs" role="tablist" aria-label="Rendez-vous">
+        <button class="tab" role="tab" id="tab-new" aria-controls="view-new" aria-selected="true" type="button">Nouveau rendez-vous</button>
+        <button class="tab" role="tab" id="tab-manage" aria-controls="view-manage" aria-selected="false" type="button">Gérer mon rendez-vous</button>
+      </div>
+
+      <!-- Nouveau rendez-vous -->
+      <section id="view-new" role="tabpanel" aria-labelledby="tab-new">
+        <div class="booking-layout" id="booking-layout">
+          <div>
+            <ol class="stepper" id="stepper">
+              <li><span>Prestations</span></li>
+              <li><span>Date & heure</span></li>
+              <li><span>Véhicule</span></li>
+              <li><span>Coordonnées</span></li>
+            </ol>
+
+            <form id="booking-form" novalidate>
+              <!-- Étape 1 -->
+              <div class="card panel" data-step="0">
+                <div class="panel-title">
+                  <h2>Quelles prestations ?</h2>
+                  <span class="muted small">Plusieurs choix possibles</span>
+                </div>
+                <div id="step-errors-0"></div>
+                <div id="service-groups"><p class="loading">Chargement des prestations…</p></div>
+                <div class="field mt-lg">
+                  <label for="otherRequest">Autre besoin ou description du problème</label>
+                  <textarea id="otherRequest" name="otherRequest" maxlength="1000" placeholder="Ex. : bruit au freinage, voyant moteur allumé, prestation non listée…"></textarea>
+                  <span class="hint">Vous ne savez pas quoi choisir ? Décrivez simplement le problème, nous établirons un diagnostic.</span>
+                </div>
+                <div class="panel-foot">
+                  <span></span>
+                  <button class="btn btn-primary" type="button" data-next>Choisir une date</button>
+                </div>
+              </div>
+
+              <!-- Étape 2 -->
+              <div class="card panel hidden" data-step="1">
+                <div class="panel-title">
+                  <h2>Date et heure de dépôt</h2>
+                </div>
+                <div id="step-errors-1"></div>
+                <div class="date-layout">
+                  <div class="calendar" id="calendar"></div>
+                  <div>
+                    <div class="slots-title" id="slots-title">Sélectionnez un jour</div>
+                    <div id="slots"><div class="empty-state">Les horaires disponibles s’afficheront ici.</div></div>
+                  </div>
+                </div>
+                <div class="panel-foot">
+                  <button class="btn btn-outline" type="button" data-prev>Retour</button>
+                  <button class="btn btn-primary" type="button" data-next>Continuer</button>
+                </div>
+              </div>
+
+              <!-- Étape 3 -->
+              <div class="card panel hidden" data-step="2">
+                <div class="panel-title">
+                  <h2>Votre véhicule</h2>
+                </div>
+                <div id="step-errors-2"></div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="brand">Marque <span class="req">*</span></label>
+                    <input id="brand" name="brand" type="text" maxlength="40" autocomplete="off" placeholder="Ex. : Peugeot" required>
+                  </div>
+                  <div class="field">
+                    <label for="model">Modèle <span class="req">*</span></label>
+                    <input id="model" name="model" type="text" maxlength="60" autocomplete="off" placeholder="Ex. : 308 1.5 BlueHDi" required>
+                  </div>
+                  <div class="field">
+                    <label for="year">Année</label>
+                    <input id="year" name="year" type="number" inputmode="numeric" min="1950" max="2100" placeholder="Ex. : 2019">
+                  </div>
+                  <div class="field">
+                    <label for="fuel">Énergie</label>
+                    <select id="fuel" name="fuel"><option value="">— Choisir —</option></select>
+                  </div>
+                  <div class="field">
+                    <label for="plate">Immatriculation</label>
+                    <input id="plate" name="plate" type="text" maxlength="15" autocomplete="off" placeholder="AB-123-CD">
+                  </div>
+                  <div class="field">
+                    <label for="mileage">Kilométrage</label>
+                    <input id="mileage" name="mileage" type="number" inputmode="numeric" min="0" placeholder="Ex. : 85000">
+                  </div>
+                </div>
+                <div class="panel-foot">
+                  <button class="btn btn-outline" type="button" data-prev>Retour</button>
+                  <button class="btn btn-primary" type="button" data-next>Continuer</button>
+                </div>
+              </div>
+
+              <!-- Étape 4 -->
+              <div class="card panel hidden" data-step="3">
+                <div class="panel-title">
+                  <h2>Vos coordonnées</h2>
+                </div>
+                <div id="step-errors-3"></div>
+                <div class="form-grid">
+                  <div class="field full">
+                    <label for="name">Nom et prénom <span class="req">*</span></label>
+                    <input id="name" name="name" type="text" maxlength="80" autocomplete="name" required>
+                  </div>
+                  <div class="field">
+                    <label for="phone">Téléphone <span class="req">*</span></label>
+                    <input id="phone" name="phone" type="tel" maxlength="20" autocomplete="tel" placeholder="06 12 34 56 78" required>
+                  </div>
+                  <div class="field">
+                    <label for="email">E-mail <span class="req">*</span></label>
+                    <input id="email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="vous@exemple.fr" required>
+                  </div>
+                  <div class="field full">
+                    <label for="notes">Commentaire</label>
+                    <textarea id="notes" name="notes" maxlength="1500" placeholder="Informations utiles : besoin d’un véhicule de remplacement, disponibilités pour récupérer la voiture…"></textarea>
+                  </div>
+                  <div class="hp-field" aria-hidden="true">
+                    <label for="website">Ne pas remplir</label>
+                    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+                  </div>
+                  <label class="checkbox full">
+                    <input type="checkbox" id="consent" name="consent">
+                    <span>J’accepte que mes données soient utilisées par le garage pour gérer mon rendez-vous et me recontacter à ce sujet. Elles ne sont jamais transmises à des tiers. <a href="/mentions-legales#donnees">En savoir plus</a></span>
+                  </label>
+                </div>
+                <div class="panel-foot">
+                  <button class="btn btn-outline" type="button" data-prev>Retour</button>
+                  <button class="btn btn-primary" type="submit" id="submit-btn">Confirmer le rendez-vous</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <aside class="card summary" id="summary" aria-live="polite"></aside>
+        </div>
+
+        <div class="card success-box hidden" id="success"></div>
+      </section>
+
+      <!-- Gérer mon rendez-vous -->
+      <section id="view-manage" role="tabpanel" aria-labelledby="tab-manage" class="hidden">
+        <div class="card panel narrow">
+          <div class="panel-title"><h2>Retrouver mon rendez-vous</h2></div>
+          <p class="muted">Saisissez la référence reçue lors de la réservation (ex. RDV-AB12CD) et l’adresse e-mail utilisée.</p>
+          <form id="manage-form" novalidate>
+            <div id="manage-errors"></div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="m-ref">Référence</label>
+                <input id="m-ref" name="ref" type="text" maxlength="20" autocomplete="off" placeholder="RDV-XXXXXX" required>
+              </div>
+              <div class="field">
+                <label for="m-email">E-mail</label>
+                <input id="m-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-dark" type="submit">Rechercher</button>
+            </div>
+          </form>
+          <div id="manage-result"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

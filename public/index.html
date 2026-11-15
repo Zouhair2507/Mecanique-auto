@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{garage} — Garage auto : tarifs, horaires et rendez-vous en ligne</title>
+  <meta name="description" content="Garage automobile toutes marques : prix des prestations affichés, taux horaires, horaires d'ouverture et prise de rendez-vous en ligne.">
+  <meta name="theme-color" content="#0f1b2d">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/home.js" defer></script>
+</head>
+<body data-page="home">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="status-pill" id="open-status"><span class="status-dot"></span><span>Chargement…</span></div>
+          <h1>Votre voiture entre de bonnes mains, <em>au juste prix.</em></h1>
+          <p class="hero-lead" id="hero-lead">Entretien, freinage, distribution, climatisation, diagnostic : tous nos tarifs sont affichés. Réservez votre créneau en ligne en moins de 2 minutes.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary btn-lg" href="/rendez-vous">Prendre rendez-vous</a>
+            <a class="btn btn-ghost-light btn-lg" href="#tarifs">Voir les tarifs</a>
+          </div>
+          <ul class="trust-list" id="trust-list"></ul>
+        </div>
+        <aside class="hero-card" aria-labelledby="hero-card-title">
+          <h2 id="hero-card-title"></h2>
+          <div id="hero-rates"></div>
+          <div class="divider"></div>
+          <h2 id="hero-today-title"></h2>
+          <p id="hero-today" class="muted"></p>
+          <a class="btn btn-dark btn-block" href="/rendez-vous">Choisir un créneau</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="tarifs">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Prix des prestations</span>
+          <h2>Des tarifs clairs, sans surprise</h2>
+          <p>Forfaits pièces et main d’œuvre comprises, prix TTC. Le prix exact selon votre véhicule vous est confirmé avant toute intervention.</p>
+        </div>
+        <div class="chips" id="category-filters" role="group" aria-label="Filtrer par catégorie"></div>
+        <div class="price-grid" id="price-grid"><p class="loading">Chargement des tarifs…</p></div>
+        <p class="price-note" id="price-note"></p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="taux-horaires">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Main d’œuvre</span>
+          <h2>Nos taux horaires</h2>
+          <p>Pour les travaux hors forfait, la main d’œuvre est facturée au temps passé, selon le barème ci-dessous.</p>
+        </div>
+        <div class="rates" id="rates"></div>
+      </div>
+    </section>
+
+    <section class="section" id="horaires">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Horaires d’ouverture</span>
+          <h2>Quand nous trouver</h2>
+          <p>Déposez votre véhicule sur rendez-vous ou passez nous voir aux heures d’ouverture.</p>
+        </div>
+        <div class="hours-layout">
+          <div class="card">
+            <table class="hours-table" id="hours-table">
+              <caption class="sr-only">Horaires d’ouverture du garage</caption>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="info-stack">
+            <div class="card info-card hidden" id="closures-card">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></svg>Fermetures à venir</h3>
+              <ul id="closures-list"></ul>
+            </div>
+            <div class="card info-card">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5s-7-6-7-11.6a7 7 0 0 1 14 0c0 5.6-7 11.6-7 11.6z"/><circle cx="12" cy="9.8" r="2.6"/></svg>Nous contacter</h3>
+              <ul class="contact-lines" id="contact-lines"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Simple et rapide</span>
+          <h2>Comment ça marche ?</h2>
+        </div>
+        <div class="steps">
+          <div class="card step">
+            <h3>Réservez en ligne</h3>
+            <p>Choisissez vos prestations, puis un créneau libre. Vous voyez une estimation du prix avant de valider.</p>
+          </div>
+          <div class="card step">
+            <h3>Déposez votre véhicule</h3>
+            <p>Nous faisons le point ensemble et vous confirmons le prix. Aucun travail supplémentaire sans votre accord.</p>
+          </div>
+          <div class="card step">
+            <h3>Récupérez-le, c’est prêt</h3>
+            <p>Nous vous appelons dès que la voiture est prête, avec le détail des travaux effectués.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2>Une question, un devis ?</h2>
+            <p>Notre équipe vous répond rapidement. Le devis est gratuit et sans engagement.</p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary btn-lg" href="/support?sujet=devis">Demander un devis</a>
+            <a class="btn btn-ghost-light btn-lg" href="/support">Contacter le support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>
